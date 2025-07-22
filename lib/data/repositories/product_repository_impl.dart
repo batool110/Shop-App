@@ -3,7 +3,8 @@ import '../datasources/product_remote_data_source.dart';
 import '../datasources/favorite_local_data_source.dart';
 
 abstract class ProductRepository {
-  Future<List<Product>> getProducts();
+  Future<List<Product>> getProducts({int? limit});
+  Future<List<Product>> getAllProducts();
   Future<List<int>> getFavoriteProductIds();
   Future<void> addToFavorites(int productId);
   Future<void> removeFromFavorites(int productId);
@@ -20,8 +21,13 @@ class ProductRepositoryImpl implements ProductRepository {
   });
 
   @override
-  Future<List<Product>> getProducts() async {
-    return await remoteDataSource.getProducts();
+  Future<List<Product>> getProducts({int? limit}) async {
+    return await remoteDataSource.getProducts(limit: limit);
+  }
+
+  @override
+  Future<List<Product>> getAllProducts() async {
+    return await remoteDataSource.getAllProducts();
   }
 
   @override

@@ -43,31 +43,35 @@ class ProductCard extends StatelessWidget {
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(AppConstants.borderRadius),
                       ),
-                      child: CachedNetworkImage(
-                        imageUrl: product.image,
-                        fit: BoxFit.contain,
-                        placeholder: (context, url) => Container(
-                          color: AppColors.background,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                      child: Hero(
+                        tag: 'product-${product.id}',
+                        child: CachedNetworkImage(
+                          imageUrl: product.image,
+                          fit: BoxFit.contain,
+                          placeholder: (context, url) => Container(
+                            color: AppColors.background,
+                            child: const Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
                           ),
-                        ),
-                        errorWidget: (context, url, error) => Container(
-                          color: AppColors.background,
-                          child: const Icon(
-                            Icons.error,
-                            color: AppColors.error,
+                          errorWidget: (context, url, error) => Container(
+                            color: AppColors.background,
+                            child: Icon(
+                              Icons.image_not_supported,
+                              color: AppColors.textHint,
+                              size: 40,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: AppConstants.smallPadding,
-                    right: AppConstants.smallPadding,
+                    top: 8,
+                    right: 8,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.surface.withValues(alpha: 0.8),
+                        color: AppColors.surface.withValues(alpha: 0.9),
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
@@ -77,8 +81,14 @@ class ProductCard extends StatelessWidget {
                           color: isFavorite
                               ? AppColors.favorite
                               : AppColors.favoriteInactive,
-                          size: AppConstants.iconSize,
+                          size: 20,
                         ),
+                        splashRadius: 20,
+                        constraints: const BoxConstraints(
+                          minWidth: 36,
+                          minHeight: 36,
+                        ),
+                        padding: const EdgeInsets.all(4),
                       ),
                     ),
                   ),
@@ -88,49 +98,84 @@ class ProductCard extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                padding: const EdgeInsets.all(AppConstants.smallPadding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      product.category.toUpperCase(),
-                      style: AppTextStyles.productCategory,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    // Category badge
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        product.category.toUpperCase(),
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 9,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    const SizedBox(height: AppConstants.smallPadding / 2),
+                    const SizedBox(height: 4),
+                    // Product title
                     Expanded(
                       child: Text(
                         product.title,
-                        style: AppTextStyles.productTitle,
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          fontWeight: FontWeight.w600,
+                          height: 1.2,
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(height: AppConstants.smallPadding),
+                    const SizedBox(height: 4),
+                    // Price and rating
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: Text(
-                            '\$${product.price.toStringAsFixed(2)}',
-                            style: AppTextStyles.productPrice,
+                        Text(
+                          '\$${product.price.toStringAsFixed(2)}',
+                          style: AppTextStyles.bodyLarge.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.star,
-                              size: AppConstants.smallIconSize,
-                              color: AppColors.warning,
-                            ),
-                            const SizedBox(width: 2),
-                            Text(
-                              product.rating.rate.toStringAsFixed(1),
-                              style: AppTextStyles.labelSmall,
-                            ),
-                          ],
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.warning.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                color: AppColors.warning,
+                                size: 12,
+                              ),
+                              const SizedBox(width: 2),
+                              Text(
+                                product.rating.rate.toStringAsFixed(1),
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.warning,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

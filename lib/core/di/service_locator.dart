@@ -3,6 +3,7 @@ import '../../data/datasources/product_remote_data_source.dart';
 import '../../data/datasources/favorite_local_data_source.dart';
 import '../../data/repositories/product_repository_impl.dart';
 import '../../presentation/cubits/product/product_cubit.dart';
+import '../../presentation/cubits/favorite/favorite_cubit.dart';
 
 class ServiceLocator {
   static late ProductRemoteDataSource _productRemoteDataSource;
@@ -22,12 +23,16 @@ class ServiceLocator {
   }
 
   static ProductCubit get productCubit => ProductCubit(_productRepository);
+  static FavoriteCubit get favoriteCubit => FavoriteCubit(_productRepository);
 }
 
 class AppBlocProviders {
   static List<BlocProvider> get providers => [
     BlocProvider<ProductCubit>(
       create: (context) => ServiceLocator.productCubit,
+    ),
+    BlocProvider<FavoriteCubit>(
+      create: (context) => ServiceLocator.favoriteCubit,
     ),
   ];
 }

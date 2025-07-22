@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Primary Colors
-  static const Color primary = Color(0xFF2196F3);
+  static const Color primary = Color.fromARGB(255, 173, 33, 243);
   static const Color primaryDark = Color(0xFF1976D2);
   static const Color primaryLight = Color(0xFFBBDEFB);
 
@@ -32,4 +32,5 @@ class AppColors {
   static const Color shadow = Color(0x1F000000);
   static const Color favorite = Color(0xFFE91E63);
   static const Color favoriteInactive = Color(0xFFBDBDBD);
+  static const Color onSurface = Color(0xFF1C1B1F);
 }

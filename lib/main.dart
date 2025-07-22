@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/theme/app_theme.dart';
 import 'core/di/service_locator.dart';
-import 'presentation/screens/product_list_screen.dart';
+import 'presentation/screens/main_screen.dart';
 
 void main() {
   // Initialize service locator
@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: AppBlocProviders.providers,
       child: MaterialApp(
-        title: 'E-Commerce App',
+        title: 'Shop App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const ProductListScreen(),
+        home: const MainScreen(),
       ),
     );
   }

@@ -6,11 +6,16 @@ class AppConstants {
   // Local Storage Keys
   static const String favoriteProductsKey = 'favorite_products';
 
+  // Pagination
+  static const int initialProductLimit = 10;
+  static const int loadMoreProductLimit = 5;
+
   // UI Constants
   static const double defaultPadding = 16.0;
   static const double smallPadding = 8.0;
   static const double largePadding = 24.0;
   static const double borderRadius = 12.0;
+  static const double cardBorderRadius = 12.0;
   static const double cardElevation = 4.0;
   static const double iconSize = 24.0;
   static const double smallIconSize = 16.0;

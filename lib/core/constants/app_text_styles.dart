@@ -68,6 +68,14 @@ class AppTextStyles {
     height: 1.3,
   );
 
+  // Caption
+  static const TextStyle caption = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.normal,
+    color: AppColors.textSecondary,
+    height: 1.2,
+  );
+
   // Special Text Styles
   static const TextStyle productTitle = TextStyle(
     fontSize: 16,
