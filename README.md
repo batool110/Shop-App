@@ -111,7 +111,7 @@ dependencies:
 
 ### Installation Steps
 
-1. **Clone the repository**
+1. **Clone the to test repository**
    ```bash
    git clone https://github.com/batool110/Shop-App.git
    cd Shop-App
